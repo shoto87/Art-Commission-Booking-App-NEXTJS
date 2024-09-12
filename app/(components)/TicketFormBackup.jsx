@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const TicketForm = () => {
   const router = useRouter();
@@ -15,17 +16,21 @@ const TicketForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    // console.log("submitted1");
     e.preventDefault();
     const res = await fetch("/api/Tickets", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Corrected the header
+      },
       body: JSON.stringify({ formData }),
-      "content-type": "application/json",
+      // "Content-Type": "application/json",
     });
-
     if (!res.ok) {
-      throw new Error("Failed to created");
-    }
+      const errorMessage = await res.text(); // This can give more details about the error
 
+      throw new Error("Failed to create Ticket !");
+    }
     router.refresh();
     router.push("/");
   };
@@ -40,6 +45,7 @@ const TicketForm = () => {
   };
 
   const [formData, setFormData] = useState(startingTicketData);
+
   return (
     <div className="flex justify-center">
       <form

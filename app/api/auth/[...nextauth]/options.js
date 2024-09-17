@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/(models)/User";
 import bcrypt from "bcrypt";
+import Ticket from "@/app/(models)/Ticket";
 
 export const options = {
   providers: [
@@ -68,9 +69,10 @@ export const options = {
               console.log("Good Pass");
               delete foundUser.password;
 
-              foundUser["role"] = "Unverified Email";
-              if (profile?.email == "iampratik70@gmail.com") {
-                userRole = "Admin";
+              if (foundUser.email === "patrick@gmail.com") {
+                foundUser["role"] = "Admin";
+              } else {
+                foundUser["role"] = "Unverified Email";
               }
               return foundUser;
             }

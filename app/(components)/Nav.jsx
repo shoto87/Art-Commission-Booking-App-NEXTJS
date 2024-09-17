@@ -1,6 +1,7 @@
 import {
   faAdd,
   faHome,
+  faPerson,
   faPowerOff,
   faTicket,
   faX,
@@ -25,6 +26,12 @@ const Nav = async () => {
         <Link href="/CreateUser">
           <FontAwesomeIcon icon={faAdd} className="icon" />
         </Link>
+        <Link href="/Member">
+          <FontAwesomeIcon icon={faPerson} className="icon" />
+        </Link>
+      </div>
+      <div>
+        <p className="text-default-text">iampatrick</p>
         {session ? (
           <Link href="/api/auth/signout?callbackUrl=/" className="text-white">
             <FontAwesomeIcon icon={faX} className="icon" />
@@ -34,9 +41,6 @@ const Nav = async () => {
             <FontAwesomeIcon icon={faPowerOff} className="icon" />
           </Link>
         )}
-      </div>
-      <div>
-        <p className="text-default-text">patrick is here @</p>
       </div>
     </nav>
   );

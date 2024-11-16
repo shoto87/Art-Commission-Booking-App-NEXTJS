@@ -48,7 +48,7 @@ const TicketForm = ({ ticket }) => {
     priority: 1,
     progress: 0,
     status: "not started",
-    category: "Hardware Problem",
+    category: "",
   };
 
   if (EDITMODE) {
@@ -68,7 +68,9 @@ const TicketForm = ({ ticket }) => {
         method="post"
         onSubmit={handleSubmit}
       >
-        <h3>{EDITMODE ? "Update Your Ticket" : "Create Your Ticket"}</h3>
+        <h3>
+          {EDITMODE ? "Update Your commission" : "Create Your commission"}
+        </h3>
         <label>Title</label>
         <input
           type="text"
@@ -96,10 +98,10 @@ const TicketForm = ({ ticket }) => {
           value={formData.category}
           onChange={handleChange}
         >
-          <option value="Hardware Problem">Hardware Problem</option>
-          <option value="Software Problem">Software Problem</option>
-          <option value="System Problem">System Problem</option>
-          <option value="Technical Problem">Technical Problem</option>
+          <option value="lineart">line art</option>
+          <option value="animeart">anime art</option>
+          <option value="3ddigitalart">3d digital art</option>
+          <option value="fan-art">fan art</option>
         </select>
         <label>Priority</label>
         <div>
@@ -181,7 +183,7 @@ const TicketForm = ({ ticket }) => {
         <input
           type="submit"
           className="btn"
-          value={EDITMODE ? "Update Ticket" : "Create Ticket"}
+          value={EDITMODE ? "Update commission" : "Create commission"}
         />
       </form>
     </div>

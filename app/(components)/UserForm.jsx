@@ -20,18 +20,21 @@ const UserForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+
     const res = await fetch("/api/Users", {
       method: "POST",
       body: JSON.stringify({ formData }),
-      "content-type": "application/json",
+      headers: { "Content-Type": "application/json" },
     });
 
     if (!res.ok) {
       const response = await res.json();
       setErrorMessage(response.message);
     } else {
-      router.refresh();
-      router.push("/");
+      const response = await res.json();
+      const userId = response.user._id; // Assuming the created user’s ID is returned
+
+      router.push(`/Member/${userId}`); // Redirect to the member page with the user ID
     }
   };
 
@@ -73,6 +76,18 @@ const UserForm = () => {
           value={formData.password}
           className="m-2 bg-slate-400 rounded"
         />
+        <label>Job</label>
+        <select
+          name="job"
+          id="job"
+          value={formData.job}
+          onChange={handleChange}
+        >
+          <option value="artist">Artist</option>
+          <option value="user">User</option>
+          <option value="guest">Guest</option>
+        </select>
+        {/* <option value="admin">Admin</option> */}
         <input
           type="submit"
           value="Create User"
